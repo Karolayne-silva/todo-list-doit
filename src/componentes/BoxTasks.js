@@ -7,6 +7,19 @@ export default function Boxtasks({ nome, index, setTasks, tasks }) {
 
   function handleCheck() {
     setChecked(!checked);
+
+    if (checked) {
+      const removedElement = tasks.splice(index, 1)[0];
+      tasks.push(removedElement);
+      setTasks([...tasks]); //atualiza a lista
+      console.log("moveu pra baixo");
+
+    } else {
+      const removedElement = tasks.splice(index, 1)[0];
+      tasks.unshift(removedElement);
+      setTasks([ ...tasks ]); 
+      console.log("moveu pra cima");
+    }
   }
   function handleDelete() {
     const newTasks = tasks.filter((_, i) => i !== index);
