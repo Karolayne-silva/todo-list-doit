@@ -1,21 +1,33 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import BoxTask from "./componentes/BoxTasks";
 import imgAdc from "./img/adc.svg";
 import imgLogo from "./img/logo.svg";
+import imgDelete from "./img/imgdelete.svg";
+import imgCheck from "./img/check.png";
+import Warn from "./componentes/warn";
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
-  const [limit, setLimit] = useState(false);
+  const [showWarn, setShowWarn] = useState(false);
 
   function handleNewTask(event) {
     if (event.key === "Enter" && input.trim() !== "") {
       if (tasks.length >= 5) {
-        alert("limite de tarefas atingido");
-        setLimit(true);
+        setShowWarn(true);
+        setTimeout(() => {
+          setShowWarn(false);
+        }, 4000);
       } else {
-        setTasks([...tasks, input]);
+        const newTasks = [
+          {
+            nome: input,
+            id: Math.floor(Math.random() * 1000),
+            isCompleted: false,
+          },
+          ...tasks,
+        ];
+        setTasks(newTasks);
         setInput("");
       }
     }
@@ -31,10 +43,38 @@ function App() {
 
   useEffect(() => {
     if (tasks.length !== 0) {
-      const updatedTasks = tasks.slice(0, 5);
-      window.localStorage.setItem("tarefa", JSON.stringify(updatedTasks));
+      window.localStorage.setItem("tarefa", JSON.stringify(tasks));
     }
   }, [tasks]);
+
+  function handleCheck(id) {
+    const newTasks = [...tasks];
+    const updatedTasks = newTasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, isCompleted: !task.isCompleted }; // Retorna um novo objeto com propriedade modificada
+      } else {
+        return task;
+      }
+    });
+    const completedTaskIndex = updatedTasks.findIndex(
+      (task) => task.isCompleted
+    );
+
+    if (completedTaskIndex !== -1) {
+      const completedTask = updatedTasks.splice(completedTaskIndex, 1)[0];
+      updatedTasks.push(completedTask);
+    } else {
+      const completedTask = updatedTasks.splice(completedTaskIndex, 1)[0];
+      updatedTasks.unshift(completedTask);
+    }
+
+    setTasks(updatedTasks);
+  }
+
+  function handleDelete(id) {
+    const removedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(removedTasks);
+  }
 
   return (
     <div className="App">
@@ -59,21 +99,29 @@ function App() {
               }}
             />
           </div>
-          
-          <ul>
-            {tasks.map((task, index) => (
-              <li key={index}>
-                <BoxTask
-                  nome={task}
-                  index={index}
-                  setTasks={setTasks}
-                  tasks={tasks}
-                />
-              </li>
-            ))}
-          </ul>
+
+          {tasks.map((task) => (
+            <div className="box-task" key={task.id}>
+              <div
+                className={task.isCompleted ? "checked-true" : "checked-false"}
+                onClick={() => handleCheck(task.id)}
+              >
+                {task.isCompleted && <img src={imgCheck} alt="check" />}
+              </div>
+              <p
+                style={{
+                  textDecoration: task.isCompleted ? "line-through" : "",
+                }}
+              >
+                {task.nome}
+              </p>
+              <div className="delete" onClick={() => handleDelete(task.id)}>
+                <img src={imgDelete} />
+              </div>
+            </div>
+          ))}
         </div>
-        {limit && <p className="warn">Limite de tarefas por dia atingido!</p>}
+        {showWarn && <Warn />}
       </div>
 
       <div className="footer">

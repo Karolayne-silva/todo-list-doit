@@ -5,7 +5,7 @@
 }
 
 :root {
-  --bg: #F9FAFB;
+  --bg: #f9fafb;
   --primary-color: #000;
   --second-color: #aa86c2;
   --third-color: #fff;
@@ -29,6 +29,7 @@ li {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .container {
@@ -39,7 +40,6 @@ li {
   border-end-end-radius: 7px;
   border-end-start-radius: 7px;
   height: 415px;
-  overflow: auto;
   background-color: var(--third-color);
 }
 
@@ -167,5 +167,28 @@ li {
   font-size: 14px;
   text-align: center;
   margin-top: 5px;
+  color: var(--color-text);
+}
+.container-warn {
+  background-color: #ead0f0;
+  width: 250px;
+  padding: 10px;
+  border: 2px solid var(--primary-color);
+  border-radius: 7px;
+  position: absolute;
+  bottom: 90px;
+  right: 70px;
+  animation: go-back 2s;
+}
+@keyframes go-back {
+  0% {
+      transform: translateX(100px);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+.container-warn .warn-text {
+  font-size: 14px;
   color: var(--color-text);
 }
