@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import imgAdc from "./img/adc.svg";
-import imgLogo from "./img/logo.svg";
 import imgDelete from "./img/imgdelete.svg";
 import imgCheck from "./img/check.png";
 import Warn from "./componentes/warn";
+import Header from "./componentes/header";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -78,9 +78,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="header">
-        <img src={imgLogo} />
-      </div>
+      <Header />
       <div className="main">
         <div className="container">
           <div className="bg-title">
