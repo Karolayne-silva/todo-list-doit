@@ -17,7 +17,7 @@ function App() {
         setShowWarn(true);
         setTimeout(() => {
           setShowWarn(false);
-        }, 4000);
+        }, 5000);
       } else {
         const newTasks = [
           {
