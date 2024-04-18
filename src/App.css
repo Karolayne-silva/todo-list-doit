@@ -150,7 +150,7 @@ li {
 }
 .header img {
   width: 80px;
-  height: 80px;
+  height: 40px;
 }
 .footer {
   border-top: 1px solid var(--primary-color);
