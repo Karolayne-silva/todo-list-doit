@@ -39,7 +39,7 @@ li {
   border-top-right-radius: 20px;
   border-end-end-radius: 7px;
   border-end-start-radius: 7px;
-  height: 415px;
+  height: 470px;
   background-color: var(--third-color);
 }
 
@@ -195,4 +195,26 @@ li {
 .container-warn .warn-text {
   font-size: 14px;
   color: var(--color-text);
+}
+
+@media (max-width: 460px) {
+  .main{
+    width: 100%;
+  }
+  .container{
+    width: 95%;
+    margin: 0px 11px 0px 11px;
+    height: 435px;
+  }
+  .input-task {
+    width: 90%;
+    padding: 23px 0px 23px 10px;
+  }
+  .div-input {
+    margin: 5px 0px 8px 5px;
+  }
+  .box-task {
+    height: 45px;
+  }
+  
 }

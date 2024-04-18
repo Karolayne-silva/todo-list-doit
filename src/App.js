@@ -13,7 +13,7 @@ function App() {
 
   function handleNewTask(event) {
     if (event.key === "Enter" && input.trim() !== "") {
-      if (tasks.length >= 5) {
+      if (tasks.length >= 6) {
         setShowWarn(true);
         setTimeout(() => {
           setShowWarn(false);
