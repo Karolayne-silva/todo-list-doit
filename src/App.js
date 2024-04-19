@@ -10,9 +10,13 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
   const [showWarn, setShowWarn] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
 
+  const storedDarkMode = localStorage.getItem("DARK_MODE") === "true";
+  const [darkMode, setDarkMode] = useState(storedDarkMode);
 
+  useEffect(() => {
+    localStorage.setItem("DARK_MODE", darkMode);
+  }, [darkMode]);
   function handleNewTask(event) {
     if (event.key === "Enter" && input.trim() !== "") {
       if (tasks.length >= 6) {
@@ -77,10 +81,11 @@ function App() {
     const removedTasks = tasks.filter((task) => task.id !== id);
     setTasks(removedTasks);
   }
+  
 
   return (
     <div className="App" data-theme={darkMode ? "dark" : "light"}>
-      <Header dark={darkMode} setDarkMode={setDarkMode}/>
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
       <div className="main">
         <div className="container">
           <div className="bg-title">

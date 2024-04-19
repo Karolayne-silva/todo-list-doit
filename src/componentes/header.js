@@ -3,15 +3,25 @@ import imgLogoBranca from "../img/logo branca.svg";
 import sol from "../img/claro.svg";
 import lua from "../img/lua.svg";
 
-export default function header({ dark, setDarkMode }) {
+export default function header({ darkMode, setDarkMode }) {
+
   function toggleDarkMode() {
-    setDarkMode(!dark);
+    setDarkMode((previousDarkMode) => !previousDarkMode);
   }
+  
   return (
     <div className="header">
-      <img src={ dark ? imgLogoBranca : imgLogoPreta} alt="logo doit" className="img-logo" />
+      <img
+        src={darkMode ? imgLogoBranca : imgLogoPreta}
+        alt="logo doit"
+        className="img-logo"
+      />
       <button onClick={toggleDarkMode}>
-        <img src={dark ? lua : sol} alt="sol/lua" className="img-modo-claro" />
+        <img
+          src={darkMode ? lua : sol}
+          alt="sol/lua"
+          className="img-modo-claro"
+        />
       </button>
     </div>
   );
