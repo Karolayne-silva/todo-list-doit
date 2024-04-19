@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import imgAdc from "./img/adc.svg";
 import imgDelete from "./img/imgdelete.svg";
-import imgCheck from "./img/check.png";
+import imgCheck from "./img/check.svg";
 import Warn from "./componentes/warn";
 import Header from "./componentes/header";
 
@@ -10,6 +10,8 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
   const [showWarn, setShowWarn] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
 
   function handleNewTask(event) {
     if (event.key === "Enter" && input.trim() !== "") {
@@ -77,8 +79,8 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Header />
+    <div className="App" data-theme={darkMode ? "dark" : "light"}>
+      <Header dark={darkMode} setDarkMode={setDarkMode}/>
       <div className="main">
         <div className="container">
           <div className="bg-title">
