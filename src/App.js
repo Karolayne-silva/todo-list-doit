@@ -15,7 +15,9 @@ function App() {
   const [darkMode, setDarkMode] = useState(storedDarkMode);
 
   useEffect(() => {
-    localStorage.setItem("DARK_MODE", darkMode);
+    if (tasks.length !== 0) {
+      localStorage.setItem("DARK_MODE", darkMode);
+    }
   }, [darkMode]);
 
   function handleNewTask(event) {
@@ -49,7 +51,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("entrou aqui");
     if (tasks.length !== 0) {
       window.localStorage.setItem("tarefa", JSON.stringify(tasks));
     }
@@ -59,7 +60,7 @@ function App() {
     const newTasks = [...tasks];
     const updatedTasks = newTasks.map((task) => {
       if (task.id === id) {
-        return { ...task, isCompleted: !task.isCompleted }; // Retorna um novo objeto com propriedade modificada
+        return { ...task, isCompleted: !task.isCompleted };
       } else {
         return task;
       }
@@ -80,11 +81,17 @@ function App() {
   }
 
   function handleDelete(id) {
-    console.log("clicou aq mana");
+    
     const removedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(removedTasks);
+    console.log(removedTasks);
+    if (removedTasks.length === 0) {
+      setTasks([])
+      localStorage.clear();
+    } else {
+      setTasks(removedTasks);
+    } 
+    
   }
-  
 
   return (
     <div className="App" data-theme={darkMode ? "dark" : "light"}>
