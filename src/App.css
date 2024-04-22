@@ -5,22 +5,24 @@
 }
 
 :root {
+  --bg: #f9fafb;
   --primary-color: #000;
   --second-color: #4e6a5f;
   --third-color: #fff;
   --color-text: #636363;
   --color-text2: #fff;
   --color-text3: #636363;
-  --img-fundo: url("../src/img/fundo white.png");
+  --bg-lines: #d9d9d9;
 }
 [data-theme="dark"] {
+  --bg: #1e1e1e;
   --primary-color: #fff;
   --second-color: #4e6a5f;
   --third-color: #1a1a1a;
   --color-text: #636363;
   --color-text2: #fff;
   --color-text3: #fff;
-  --img-fundo: url("../src/img/fundo dark.png");
+  --bg-lines: #646464;
 }
 
 body {
@@ -32,12 +34,26 @@ li {
 }
 
 .App {
+  background-color: var(--bg);
   position: relative;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: var(--img-fundo);
-  background-size: 80px;
+  background-image: linear-gradient(
+      to right,
+      var(--bg-lines) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--bg-lines) 1px, transparent 1px),
+    linear-gradient(to right, var(--bg-lines) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-lines) 1px, transparent 1px);
+  background-size: 
+    150px 150px,
+    /* Tamanho dos quadrados principais */ 
+    150px 150px; /* Tamanho dos quadrados principais */
+
+  background-position: 0 0, 0 0, 75px 75px, 75px 75px; /* Posição para evitar sobreposição */
+  background-repeat: repeat, repeat, repeat, repeat;
 }
 
 .main {

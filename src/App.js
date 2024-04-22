@@ -17,6 +17,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("DARK_MODE", darkMode);
   }, [darkMode]);
+
   function handleNewTask(event) {
     if (event.key === "Enter" && input.trim() !== "") {
       if (tasks.length >= 6) {
@@ -48,6 +49,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log("entrou aqui");
     if (tasks.length !== 0) {
       window.localStorage.setItem("tarefa", JSON.stringify(tasks));
     }
@@ -78,6 +80,7 @@ function App() {
   }
 
   function handleDelete(id) {
+    console.log("clicou aq mana");
     const removedTasks = tasks.filter((task) => task.id !== id);
     setTasks(removedTasks);
   }
