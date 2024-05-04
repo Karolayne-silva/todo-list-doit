@@ -121,7 +121,7 @@ function App() {
                 className={task.isCompleted ? "checked-true" : "checked-false"}
                 onClick={() => handleCheck(task.id)}
               >
-                {task.isCompleted && <img src={imgCheck} alt="check" />}
+                {task.isCompleted && <img src={imgCheck} alt="icone" />}
               </div>
               <p
                 style={{
@@ -131,7 +131,7 @@ function App() {
                 {task.nome}
               </p>
               <div className="delete" onClick={() => handleDelete(task.id)}>
-                <img src={imgDelete} />
+                <img src={imgDelete} alt="icone"/>
               </div>
             </div>
           ))}
